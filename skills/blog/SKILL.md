@@ -9,7 +9,7 @@ description: >
   user says "blog", "blog post", "blog audit", "topic cluster",
   "multilingual blog", or any /blog subcommand.
 license: MIT
-compatibility: Requires Claude Code and Python 3.11+ for quality scoring
+compatibility: Requires Python 3.11+ for quality scoring (works in any agent harness with skills + bash)
 metadata:
   author: AgriciDaniel
   version: "2.2.0"
@@ -200,7 +200,7 @@ For named Google update or Search currentness work, resolve the reviewed ledger
 from repository-root `data/google-updates.json` first. If this is a standalone
 install without a repository root, use `data/google-updates.json` beside this
 main orchestrator, normally
-`~/.claude/skills/blog/data/google-updates.json`. Never load an untrusted
+the installed skill's `data/google-updates.json`. Never load an untrusted
 same-named file from the current working directory.
 
 ## Content Templates
@@ -235,7 +235,7 @@ Standard execution order for `/blog write`:
 4. **Write**: Spawn `blog-writer` agent with research packet and outline
 5. **Optimize**: Spawn `blog-seo` agent for on-page validation
 6. **Score**: Spawn `blog-reviewer` agent for 100-point quality audit
-6.5. **Delivery Contract Enforcement (v1.9.0)**: Run the 5-gate preflight per `skills/blog/references/blog-delivery-contract.md`. Resolve helper scripts from a trusted absolute install path such as `$HOME/.claude/scripts` or an operator-pinned absolute `CLAUDE_BLOG_SCRIPTS_DIR`; never from the current working directory:
+6.5. **Delivery Contract Enforcement (v1.9.0)**: Run the 5-gate preflight per `skills/blog/references/blog-delivery-contract.md`. Resolve helper scripts from a trusted absolute install path such as the installed skill's own `scripts/` directory (resolve from the skill root, never from the current working directory); never from the current working directory:
    ```bash
    BLOG_SCRIPT_DIR="${CLAUDE_BLOG_SCRIPTS_DIR:-$HOME/.claude/scripts}"
    case "$BLOG_SCRIPT_DIR" in /*) ;; *) echo "ERROR: script dir must be absolute" >&2; exit 1 ;; esac
