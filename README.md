@@ -1,3 +1,13 @@
+
+## Skydive adaptation (DesignSpark Studio fork)
+
+This fork runs the claude-blog skill suite on the Skydive agent platform (DesignSpark Studio / MoveTogether). Changes from upstream:
+
+1. `~/.claude/skills/` → `~/.pi/agent/skills/` (Skydive harness skill dir). Install with `install-skydive.sh` in this repo root.
+2. Main `blog` skill resolves helper scripts from the skill's own root, not `$HOME/.claude/scripts`.
+3. Subagent personas in `agents/` map to Skydive `subagent` tool `persona` fields.
+
+Used by: Paige (blog pipeline owner), with Flute on voice sign-off. Blogs publish to movetogetherfitness.com/blog (Sanity + Next.js).
 # AI Blog Writing & SEO Optimization Skill for Claude Code (`claude-blog`)
 
 <p align="center">
